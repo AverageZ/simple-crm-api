@@ -54,14 +54,13 @@ This is **optional**, but if you want to learn how to write JavaScript tests for
 
 + `clean` - remove coverage data, Jest cache and transpiled files,
 + `build` - transpile TypeScript to ES6,
-+ `watch` - interactive watch mode to automatically transpile source files, 
++ `watch` - interactive watch mode to automatically transpile source files,
 + `lint` - lint source files and tests,
 + `test` - run tests,
 + `test:watch` - interactive watch mode to automatically re-run tests
 
-## Alternative
-
-As an alternative to TypeScript, you can try my [Node.js Flow boilerplate][flow-boilerplate]. It's basically the same but with ES6, async/await, Flow type checking and ESLint.
+## Docs
+[Overview](docs/general)
 
 ## License
 Licensed under the APLv2. See the [LICENSE](https://github.com/jsynowiec/node-typescript-boilerplate/blob/master/LICENSE) file for details.
