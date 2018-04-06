@@ -60,7 +60,7 @@ This is **optional**, but if you want to learn how to write JavaScript tests for
 + `test:watch` - interactive watch mode to automatically re-run tests
 
 ## Docs
-[Overview](docs/general)
+[Overview](docs/general.md)
 
 ## License
 Licensed under the APLv2. See the [LICENSE](https://github.com/jsynowiec/node-typescript-boilerplate/blob/master/LICENSE) file for details.
