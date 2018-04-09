@@ -4,9 +4,7 @@
  */
 
 {
-  "extends": [
-    "tslint-microsoft-contrib"
-  ],
+  "extends": "tslint:recommended",
   "rules": {
     "mocha-no-side-effect-code": false,
     "missing-jsdoc": false,
@@ -15,7 +13,13 @@
     "promise-function-async": false,
     "no-void-expression": false,
     "no-redundant-jsdoc": false,
+    "no-backbone-get-set-outside-model": false,
     "prefer-type-cast": false,
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
     "trailing-comma": [ // https://palantir.github.io/tslint/rules/trailing-comma/
       true,
       {
