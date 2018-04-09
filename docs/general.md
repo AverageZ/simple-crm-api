@@ -31,7 +31,18 @@ _Uses swagger-flavoured markup/down_
 # Endpoints
 ### Clients
 ```
-/client:
+/clients:
+    get:
+        summary: "Get all clients"
+        description: "Returns all clients"
+        responses:
+            200:
+                description: "successful operation"
+                schema:
+                    type: "array"
+                    format: "#/definitions/Client"
+        security:
+            - "read:clients"
     post:
         summary: "Add a new client"
         description: ""
@@ -45,7 +56,7 @@ _Uses swagger-flavoured markup/down_
         security:
             - "write:clients"
             - "read:clients"
-/client/{id}:
+/clients/{id}:
     get:
         summary: "Find a client by id"
         description: "Returns a single client"
