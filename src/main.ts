@@ -1,32 +1,29 @@
-/**
- * Some predefined delays (in milliseconds).
- */
-export enum Delays {
-  Short = 500,
-  Medium = 2000,
-  Long = 5000,
-}
+import * as bodyParser from 'body-parser';
+import * as express from 'express';
+import * as hbs from 'express-handlebars';
+import * as logger from 'morgan';
+import * as path from 'path';
+import clientRoutes from './routes/clients';
+import organizationRoutes from './routes/organizations';
 
-/**
- * Returns a Promise<string> that resolves after given time.
- *
- * @param {string} name - A name.
- * @param {number=} [delay=Delays.Medium] - Number of milliseconds to delay resolution of the Promise.
- * @returns {Promise<string>}
- */
-function delayedHello(name: string, delay: number = Delays.Medium): Promise<string> {
-  return new Promise(
-    (resolve: (value?: string) => void) => setTimeout(
-      () => resolve(`Hello, ${name}`),
-      delay,
-    ),
-  );
-}
+// Create the app
+const app = express();
 
-// Below are examples of using TSLint errors suppression
-// Here it is suppressing missing type definitions for greeter function
+// Set up views and view engine
+app.engine('hbs', hbs({ extname: 'hbs', defaultLayout: 'layout', layoutsDir: `${__dirname}/views/layouts/` }));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
-export async function greeter(name) { // tslint:disable-line typedef
-  // tslint:disable-next-line no-unsafe-any no-return-await
-  return await delayedHello(name, Delays.Long);
-}
+// Set up the logger and parser
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Set up routing
+// @ts-ignore
+// tslint:disable-next-line
+app.use('/api-v1/clients', clientRoutes);
+app.use('/api-v1/orgs', organizationRoutes);
+
+// Start the app
+app.listen(8000);
