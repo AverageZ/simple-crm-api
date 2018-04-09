@@ -1,15 +1,20 @@
 {
   "name": "node-typescript-boilerplate",
-  "version": "0.0.0",
-  "description": "Minimalistic boilerplate to quick-start Node.js development in TypeScript.",
+  "version": "0.1.0",
+  "description": "A simple CRM api built with TypeScript",
   "engineStrict": true,
   "engines": {
     "node": ">= 8.9.0"
   },
   "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/express-serve-static-core": "^4.11.1",
     "@types/jest": "~22.2.2",
-    "@types/node": "~8.10.0",
+    "@types/joi": "^13.0.7",
+    "@types/node": "^9.6.2",
+    "@types/rethinkdb": "^2.3.9",
     "jest": "~22.4.3",
+    "pre-commit": "^1.2.2",
     "rimraf": "~2.6.2",
     "ts-jest": "~22.4.2",
     "tslint": "~5.9.1",
@@ -21,15 +26,24 @@
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "watch": "tsc -w -p tsconfig.release.json",
+    "start": "node build/src/main.js",
     "lint": "tslint -t stylish --project \"tsconfig.json\"",
     "pretest": "npm run lint",
     "test": "npm run test-only",
     "test-only": "jest --coverage",
     "test:watch": "jest --watch"
   },
-  "author": "Jakub Synowiec <github@jakubsynowiec.info>",
+  "author": "Alex Zajac",
+  "pre-commit": [
+    "lint"
+  ],
   "license": "APLv2",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "express-handlebars": "^3.0.0",
+    "joi": "^13.1.2",
+    "morgan": "^1.9.0",
     "rethinkdb": "^2.3.3",
     "tslib": "~1.9.0"
   }
