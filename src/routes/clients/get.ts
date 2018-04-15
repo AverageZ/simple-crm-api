@@ -1,28 +1,29 @@
 import * as express from 'express';
 import * as r from 'rethinkdb';
 
-export default function getAll(req: express.Request, res: express.Response) {
-  r.connect({ host: 'localhost', port: 28015 }, (err: r.ReqlDriverError, conn: r.Connection) => {
-    if (err) {
-      throw err;
-    }
+import Ctr from 'controllers/connect';
 
-    r
-      .db('test')
-      .table('clients')
-      .run(conn, (runError: Error, cursor: r.Cursor) => {
-        if (runError) {
-          throw runError;
-        }
+export default function getAll(_: express.Request, res: express.Response) {
+  const Connector = new Ctr({ db: 'test', table: 'clients' });
 
-        cursor.toArray((dataError: Error, result: r.Row[]) => {
-          if (dataError) {
-            throw dataError;
+  Connector
+    .makeConnection()
+    .then((conn: r.Connection) => {
+      Connector
+        .accessTable()
+        .run(conn, (runError: Error, cursor: r.Cursor) => {
+          if (runError) {
+            throw runError;
           }
 
-          res.json(result);
-          conn.close();
+          cursor.toArray((dataError: Error, result: r.Row[]) => {
+            if (dataError) {
+              throw dataError;
+            }
+
+            res.json(result);
+            conn.close();
+          });
         });
-      });
-  });
+    });
 }

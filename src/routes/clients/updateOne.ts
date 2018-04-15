@@ -1,28 +1,29 @@
 import * as express from 'express';
 import * as r from 'rethinkdb';
+
+import Ctr from 'controllers/connect';
 import validate from './validations';
 
 export default function updateOne(req: express.Request, res: express.Response) {
   validate(req.body);
 
-  r.connect({ host: 'localhost', port: 28015 }, (connError: r.ReqlDriverError, conn: r.Connection) => {
-    if (connError) {
-      throw connError;
-    }
+  const Connector = new Ctr({ db: 'test', table: 'clients' });
 
-    r
-      .db('test')
-      .table('clients')
-      .filter(r.row('id').eq(req.params.id))
-      .update(req.body)
-      .run(conn, (runError: Error, result: r.WriteResult) => {
-        if (runError) {
-          throw runError;
-        }
+  Connector
+    .makeConnection()
+    .then((conn: r.Connection) => {
+      Connector
+        .accessTable()
+        .filter(r.row('id').eq(req.params.id))
+        .update(req.body)
+        .run(conn, (runError: Error, result: r.WriteResult) => {
+          if (runError) {
+            throw runError;
+          }
 
-        // Send back the id of the generated client
-        res.json(result);
-        conn.close();
-      });
-  });
+          // Send back the id of the generated client
+          res.json(result);
+          conn.close();
+        });
+    });
 }

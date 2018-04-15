@@ -6,7 +6,6 @@
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "importHelpers": true,
-    "jsx": "react",
     "alwaysStrict": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
@@ -16,7 +15,21 @@
     "noUnusedParameters": true,
     "noImplicitAny": false,
     "noImplicitThis": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "baseUrl": "src",
+    "lib": [
+      "es6",
+      "dom",
+      "esnext"
+    ],
+    "paths": {
+      "controllers/*": [
+        "controllers/*"
+      ],
+      "routes/*": [
+        "routes/*"
+      ],
+    }
   },
   "include": [
     "src/**/*",

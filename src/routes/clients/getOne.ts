@@ -1,30 +1,31 @@
 import * as express from 'express';
 import * as r from 'rethinkdb';
 
+import Ctr from 'controllers/connect';
+
 export default function getOne(req: express.Request, res: express.Response) {
-  r.connect({ host: 'localhost', port: 28015 }, (err: r.ReqlDriverError, conn: r.Connection) => {
-    if (err) {
-      throw err;
-    }
+  const Connector = new Ctr({ db: 'test', table: 'clients' });
 
-    r
-      .db('test')
-      .table('clients')
-      .filter(r.row('id').eq(req.params.id))
-      // Needs to get orgs, notes, etc.
-      .run(conn, (runError: Error, cursor: r.Cursor) => {
-        if (runError) {
-          throw runError;
-        }
-
-        cursor.toArray((dataError: Error, result: r.Row[]) => {
-          if (dataError) {
-            throw dataError;
+  Connector
+    .makeConnection()
+    .then((conn: r.Connection) => {
+      Connector
+        .accessTable()
+        .filter(r.row('id').eq(req.params.id))
+        // Needs to get orgs, notes, etc.
+        .run(conn, (runError: Error, cursor: r.Cursor) => {
+          if (runError) {
+            throw runError;
           }
 
-          res.json(result);
-          conn.close();
+          cursor.toArray((dataError: Error, result: r.Row[]) => {
+            if (dataError) {
+              throw dataError;
+            }
+
+            res.json(result);
+            conn.close();
+          });
         });
-      });
-  });
+    });
 }
