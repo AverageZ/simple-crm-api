@@ -1,67 +1,42 @@
-import {
-  // addMockFunctionsToSchema,
-  makeExecutableSchema,
-} from 'graphql-tools';
+import { makeExecutableSchema } from 'graphql-tools';
 
-// import mocks from './mocks';
+import Client from 'data/schema/client';
+import Note from 'data/schema/note';
+import Organization from 'data/schema/organization';
+import Rep from 'data/schema/rep';
+import Tag from 'data/schema/tag';
+
 import resolvers from './resolvers';
 
-const typeDefs = `
-type Rep {
-  id: ID!
-  firstName: String
-  lastName: String
-  email: String
-  permissions: String
-}
-type Note {
-  id: ID!
-  title: String
-  updated: String
-  content: String
-  authors: [Rep]
-  tags: [Tag]
-}
-type Tag {
-  id: ID!
-  title: String
-  updated: String
-}
-type Organization {
-  id: ID!
-  name: String
-  email: String
-  phone: String
-  reps: [Rep]
-  notes: [Note]
-  tags: [Tag]
-  clients: [Client]
-}
-type Client {
-  id: ID!
-  firstName: String
-  lastName: String
-  updated: String
-  status: String
-  email: String
-  phone: String
-  reps: [Rep]
-  notes: [Note]
-  tags: [Tag]
-  organizations: [Organization]
-}
+const RootQuery = `
+  type Query {
+    clients: [Client]
+    client(id: ID!): Client
 
-type Query {
-  clients: [Client]
-  client(id: ID!): Client
-
-  organizations: [Organization]
-  organization(id: ID!): Organization
-}
+    organizations: [Organization]
+    organization(id: ID!): Organization
+  }
 `;
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+const SchemaDefinition = `
+  schema {
+    query: Query
+    mutation: Mutation
+  }
+`;
 
-// addMockFunctionsToSchema({ schema, mocks });
+const schema = makeExecutableSchema({
+  resolvers,
+
+  typeDefs: [
+    SchemaDefinition,
+    RootQuery,
+    Client,
+    Note,
+    Organization,
+    Rep,
+    Tag,
+  ],
+});
 
 export default schema;
