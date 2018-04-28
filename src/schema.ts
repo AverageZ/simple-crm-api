@@ -17,6 +17,12 @@ const RootQuery = `
 
     reps: [Rep]
     rep(id: ID!): Rep
+
+    notes: [Note]
+    note(id: ID!): Note
+
+    tags: [Tag]
+    tag(id: ID!): Tag
   }
 `;
 
