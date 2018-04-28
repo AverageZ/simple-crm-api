@@ -9,7 +9,7 @@ import {
 // import clientRoutes from 'routes/clients';
 // import organizationRoutes from 'routes/organizations';
 
-import schema from 'data/schema';
+import schema from 'schema';
 
 // Create the app
 const app = express();
