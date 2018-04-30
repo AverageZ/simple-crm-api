@@ -2,7 +2,7 @@
 import Note from 'schema/notes';
 import Organization from 'schema/organizations';
 import Rep from 'schema/reps';
-import Tag from 'schema/tag';
+import Tag from 'schema/tags';
 /* tslint:enable */
 
 import { createClient } from 'schema/clients/resolvers/create';
@@ -39,6 +39,9 @@ const schema = `
       email: String,
       phone: String,
       repId: ID!,
+      organizations: [ID],
+      notes: [ID],
+      tags: [ID],
     ): Client
 
     updateClient(
@@ -48,6 +51,9 @@ const schema = `
       status: String,
       email: String,
       phone: String,
+      organizations: [ID],
+      notes: [ID],
+      tags: [ID],
     ): Client
 
     deleteClient(

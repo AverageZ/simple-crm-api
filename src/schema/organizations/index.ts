@@ -2,7 +2,7 @@
 import Client from 'schema/clients';
 import Note from 'schema/notes';
 import Rep from 'schema/reps';
-import Tag from 'schema/tag';
+import Tag from 'schema/tags';
 /* tslint:enable */
 
 import { createOrganization } from 'schema/organizations/resolvers/create';
@@ -40,6 +40,10 @@ const schema = `
       name: String,
       email: String,
       phone: String,
+      clients: [ID],
+      tags: [ID],
+      notes: [ID],
+      reps: [ID],
     ): Organization
 
     deleteOrganization(

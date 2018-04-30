@@ -31,6 +31,7 @@ const schema = `
       updated: String,
       content: String,
       repId: ID!,
+      tags: [ID],
     ): Note
 
     updateNote(
@@ -39,6 +40,7 @@ const schema = `
       updated: String,
       content: String,
       repId: ID!,
+      tags: [ID],
     ): Note
 
     deleteNote(

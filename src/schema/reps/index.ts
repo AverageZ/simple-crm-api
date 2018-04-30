@@ -1,8 +1,8 @@
 /* tslint:disable */
 import Client from 'schema/clients';
 import Organization from 'schema/organizations';
-import Note from 'schema/note';
-import Tag from 'schema/tag';
+import Note from 'schema/notes';
+import Tag from 'schema/tags';
 /* tslint:enable */
 
 import { createRep } from 'schema/reps/resolvers/create';
@@ -11,7 +11,7 @@ import { rep, reps } from 'schema/reps/resolvers/get';
 import { updateRep } from 'schema/reps/resolvers/update';
 
 const schema = `
-    type DeletedRep {
+  type DeletedRep {
     id: ID!
     email: String
   }
@@ -22,6 +22,7 @@ const schema = `
     lastName: String
     email: String
     permissions: String
+    tags: [Tag]
   }
 
   extend type Mutation {
@@ -30,6 +31,7 @@ const schema = `
       lastName: String,
       email: String,
       permissions: String,
+      tags: [ID],
     ): Rep
 
     updateRep(
@@ -38,6 +40,7 @@ const schema = `
       lastName: String,
       email: String,
       permissions: String,
+      tags: [ID],
     ): Rep
 
     deleteRep(
