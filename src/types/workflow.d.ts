@@ -29,7 +29,7 @@ interface IRule {
   trigger: 'create' | 'read' | 'update' | 'delete' | 'match';
 
   // What does this rule watch
-  match: 'client' | 'organization' | 'note' | 'rep';
+  match: 'contact' | 'organization' | 'note' | 'rep';
 
   // What actions does this rule run
   actions: IAction[];

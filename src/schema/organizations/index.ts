@@ -21,7 +21,7 @@ const schema = `
     reps: [Rep]
     notes: [Note]
     tags: [Tag]
-    clients: [Client]
+    contacts: [Contact]
   }
 
   extend type Mutation {
@@ -37,7 +37,7 @@ const schema = `
       name: String,
       email: String,
       phone: String,
-      clients: [ID],
+      contacts: [ID],
       tags: [ID],
       notes: [ID],
       reps: [ID],

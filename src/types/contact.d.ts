@@ -1,4 +1,4 @@
-interface IClient {
+interface IContact {
   email: string;
   firstName: string;
   id: string;

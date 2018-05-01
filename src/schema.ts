@@ -1,7 +1,7 @@
 import { makeExecutableSchema } from 'graphql-tools';
 import * as _ from 'lodash';
 
-import Client, { clientResolver } from 'schema/clients';
+import Contact, { contactResolver } from 'schema/contacts';
 import Note, { noteResolver } from 'schema/notes';
 import Organization, { organizationResolver } from 'schema/organizations';
 import Rep, { repResolver } from 'schema/reps';
@@ -9,8 +9,8 @@ import Tag, { tagResolver } from 'schema/tags';
 
 const RootQuery = `
   type Query {
-    clients: [Client]
-    client(id: ID!): Client
+    contacts: [Contact]
+    contact(id: ID!): Contact
 
     organizations: [Organization]
     organization(id: ID!): Organization
@@ -28,7 +28,7 @@ const RootQuery = `
 
 const RootMutation = `
   type Mutation {
-    doThing(id: ID!): Client
+    doThing(id: ID!): Contact
   }
 `;
 
@@ -41,7 +41,7 @@ const SchemaDefinition = `
 
 const schema = makeExecutableSchema({
   resolvers: _.merge(
-    clientResolver(),
+    contactResolver(),
     noteResolver(),
     organizationResolver(),
     repResolver(),
@@ -51,7 +51,7 @@ const schema = makeExecutableSchema({
   typeDefs: [
     SchemaDefinition,
     RootMutation,
-    Client,
+    Contact,
     Note,
     Organization,
     Rep,

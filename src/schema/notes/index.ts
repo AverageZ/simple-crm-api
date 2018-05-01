@@ -17,7 +17,7 @@ const schema = `
     title: String
     updated: String
     content: String
-    authors: [Rep]
+    reps: [Rep]
     tags: [Tag]
   }
 
