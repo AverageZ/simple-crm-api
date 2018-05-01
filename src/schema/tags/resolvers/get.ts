@@ -2,7 +2,7 @@ import * as r from 'rethinkdb';
 
 import Ctr from 'utils/connector';
 
-export function tag(_: any, args: ITag): Promise<ITag | string> {
+export function tag(_: any, args: { id: string }): Promise<ITag | string> {
   const Connector = new Ctr({ db: 'test', table: 'tags' });
 
   return new Promise((resolve: (result: ITag) => void, reject: (err: string) => void) => {

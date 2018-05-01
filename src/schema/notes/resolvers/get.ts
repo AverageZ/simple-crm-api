@@ -2,7 +2,7 @@ import * as r from 'rethinkdb';
 
 import Ctr from 'utils/connector';
 
-export function note(_: any, args: INote): Promise<INote | string> {
+export function note(_: any, args: { id: string }): Promise<INote | string> {
   const Connector = new Ctr({ db: 'test', table: 'notes' });
 
   return new Promise((resolve: (result: INote) => void, reject: (err: string) => void) => {

@@ -25,7 +25,11 @@ export function updateClient(_: any, args: IClient): Promise<IClient | string> {
               throw runError;
             }
 
-            resolve(result.changes[0].new_val);
+            if (result.changes.length) {
+              resolve(result.changes[0].new_val);
+            }
+
+            resolve(null);
           });
       }).catch(reject);
   });

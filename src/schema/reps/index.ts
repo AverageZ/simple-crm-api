@@ -1,14 +1,9 @@
-/* tslint:disable */
-import Client from 'schema/clients';
-import Organization from 'schema/organizations';
-import Note from 'schema/notes';
-import Tag from 'schema/tags';
-/* tslint:enable */
-
 import { createRep } from 'schema/reps/resolvers/create';
 import { deleteRep } from 'schema/reps/resolvers/delete';
 import { rep, reps } from 'schema/reps/resolvers/get';
 import { updateRep } from 'schema/reps/resolvers/update';
+
+import { tag as getTag } from 'schema/tags/resolvers/get';
 
 const schema = `
   type DeletedRep {
@@ -59,6 +54,12 @@ function repResolver() {
     Query: {
       rep,
       reps,
+    },
+
+    Rep: {
+      tags: (r: IRep) => {
+        return r.tags.map((t: string) => getTag(null, { id: t }));
+      },
     },
 
     Mutation: {

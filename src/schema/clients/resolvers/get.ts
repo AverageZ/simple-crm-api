@@ -5,7 +5,7 @@ import Ctr from 'utils/connector';
 export function client(_: any, args: IClient): Promise<IClient | string> {
   const Connector = new Ctr({ db: 'test', table: 'clients' });
 
-  return new Promise((resolve: (result: IClient) => void, reject: (err: string) => void) => {
+  return new Promise((resolve: (result: IClient) => void, reject: (err: string | Error) => void) => {
     Connector
       .makeConnection()
       .then((conn: r.Connection) => {
@@ -19,7 +19,8 @@ export function client(_: any, args: IClient): Promise<IClient | string> {
 
             resolve(result);
           });
-      }).catch(reject);
+      })
+      .catch(reject);
   });
 }
 

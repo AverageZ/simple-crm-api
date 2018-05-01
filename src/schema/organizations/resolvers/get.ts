@@ -2,7 +2,7 @@ import * as r from 'rethinkdb';
 
 import Ctr from 'utils/connector';
 
-export function organization(_: any, args: IOrganization): Promise<IOrganization | string> {
+export function organization(_: any, args: { id: string }): Promise<IOrganization | string> {
   const Connector = new Ctr({ db: 'test', table: 'organizations' });
 
   return new Promise((resolve: (result: IOrganization) => void, reject: (err: string) => void) => {
@@ -23,7 +23,7 @@ export function organization(_: any, args: IOrganization): Promise<IOrganization
   });
 }
 
-export function organizations(): Promise<IOrganization[] | string> {
+export function organizations(_: any): Promise<IOrganization[] | string> {
   const Connector = new Ctr({ db: 'test', table: 'organizations' });
 
   return new Promise((resolve: (results: IOrganization[]) => void, reject: (err: string) => void) => {

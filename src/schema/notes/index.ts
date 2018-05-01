@@ -1,14 +1,10 @@
-/* tslint:disable */
-import Client from 'schema/clients';
-import Organization from 'schema/organizations';
-import Rep from 'schema/reps';
-import Tag from 'schema/tag';
-/* tslint:enable */
-
 import { createNote } from 'schema/notes/resolvers/create';
 import { deleteNote } from 'schema/notes/resolvers/delete';
 import { note, notes } from 'schema/notes/resolvers/get';
 import { updateNote } from 'schema/notes/resolvers/update';
+
+import { rep as getRep } from 'schema/reps/resolvers/get';
+import { tag as getTag } from 'schema/tags/resolvers/get';
 
 const schema = `
   type DeletedNote {
@@ -59,6 +55,16 @@ function noteResolver() {
     Query: {
       note,
       notes,
+    },
+
+    Note: {
+      reps: (n: INote) => {
+        return n.reps.map((r: string) => getRep(null, { id: r }));
+      },
+
+      tags: (n: INote) => {
+        return n.tags.map((t: string) => getTag(null, { id: t }));
+      },
     },
 
     Mutation: {

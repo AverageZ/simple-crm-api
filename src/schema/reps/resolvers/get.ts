@@ -2,7 +2,7 @@ import * as r from 'rethinkdb';
 
 import Ctr from 'utils/connector';
 
-export function rep(_: any, args: IRep): Promise<IRep | string> {
+export function rep(_: any, args: { id: string }): Promise<IRep | string> {
   const Connector = new Ctr({ db: 'test', table: 'reps' });
 
   return new Promise((resolve: (result: IRep) => void, reject: (err: string) => void) => {

@@ -1,13 +1,13 @@
 interface IClient {
-  id: string;
-  firstName: string;
-  lastName: string;
-  updated: string;
-  status: string;
   email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  notes: string[];
+  organizations: string[];
   phone: string;
-  // reps: [Rep];
-  // notes: [Note];
-  // tags: [Tag];
-  // organizations: [Organization]
+  reps: string[];
+  status: string;
+  tags: string[];
+  updated: string;
 }

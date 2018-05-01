@@ -4,4 +4,7 @@ interface IOrganization {
   email: string;
   phone: string;
   updated: string;
+  reps: string[];
+  tags: string[];
+  notes: string[];
 }

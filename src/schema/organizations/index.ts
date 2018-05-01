@@ -1,14 +1,11 @@
-/* tslint:disable */
-import Client from 'schema/clients';
-import Note from 'schema/notes';
-import Rep from 'schema/reps';
-import Tag from 'schema/tags';
-/* tslint:enable */
-
 import { createOrganization } from 'schema/organizations/resolvers/create';
 import { deleteOrganization } from 'schema/organizations/resolvers/delete';
 import { organization, organizations } from 'schema/organizations/resolvers/get';
 import { updateOrganization } from 'schema/organizations/resolvers/update';
+
+import { note as getNote } from 'schema/notes/resolvers/get';
+import { rep as getRep } from 'schema/reps/resolvers/get';
+import { tag as getTag } from 'schema/tags/resolvers/get';
 
 const schema = `
   type DeletedOrganization {
@@ -57,6 +54,20 @@ function organizationResolver() {
     Query: {
       organization,
       organizations,
+    },
+
+    Organization: {
+      reps: (o: IOrganization) => {
+        return o.reps.map((r: string) => getRep(null, { id: r }));
+      },
+
+      notes: (o: IOrganization) => {
+        return o.notes.map((r: string) => getNote(null, { id: r }));
+      },
+
+      tags: (o: IOrganization) => {
+        return o.tags.map((t: string) => getTag(null, { id: t }));
+      },
     },
 
     Mutation: {
