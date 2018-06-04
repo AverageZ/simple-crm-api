@@ -2,6 +2,8 @@ import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as logger from 'morgan';
 
+import * as cors from 'cors';
+
 import {
   graphiqlExpress,
   graphqlExpress,
@@ -15,7 +17,7 @@ const app = express();
 app.use(logger('dev'));
 
 // The GraphQL endpoint
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.use('/graphql', cors(), bodyParser.json(), graphqlExpress({ schema }));
 
 // GraphiQL, a visual editor for queries
 app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
